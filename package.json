@@ -1,0 +1,110 @@
+{
+  "homepage": ".",
+  "name": "project_oxygen",
+  "productName": "Project Oxygen",
+  "version": "0.0.4",
+  "description": "Desktop app for Project Oxygen",
+  "main": "build/electron.js",
+  "scripts": {
+    "react-start": "cross-env NODE_ENV=development react-scripts start",
+    "react-build": "cross-env NODE_ENV=production react-scripts build && tsc -p tsconfig.json",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "npm run react-build && electron-builder --publish=always",
+    "build": "npm run react-build && npm run electron-build",
+    "postinstall": "electron-rebuild",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"npm run tsc-watch\" \"wait-on http://localhost:3000 && electron .\"",
+    "tsc-watch": "tsc -watch -p tsconfig.json",
+    "tsc": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chakra-ui/react": "^2.7.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@microsoft/fetch-event-source": "^2.0.1",
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "electron-better-ipc": "^2.0.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.4.8",
+    "electron-updater": "^6.1.1",
+    "framer-motion": "^10.12.18",
+    "fs": "0.0.1-security",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.1",
+    "react-scripts": "^5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "sqlite3": "^5.1.6",
+    "styled-components": "^6.0.4"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^2.1.0",
+    "@types/node": "^20.4.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^25.2.0",
+    "electron-builder": "^24.4.0",
+    "electron-rebuild": "^3.2.9",
+    "typescript": "^4.9.5",
+    "wait-on": "^7.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.project-oxygen.desktop",
+    "files": [
+      "build/electron.js",
+      "build/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "YOUR_GITHUB_USERNAME",
+      "repo": "YOUR_GITHUB_REPO",
+      "private": false,
+      "releaseType": "release"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements/entitlements.mac.plist",
+      "entitlementsInherit": "entitlements/entitlements.mac.plist",
+      "type": "distribution",
+      "notarize": true
+    },
+    "afterSign": "entitlements/notarize.js",
+    "dmg": {
+      "sign": true
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
