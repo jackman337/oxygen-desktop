@@ -1,7 +1,7 @@
 # Project Oxygen ⚛️
 Oxygen is an AI assistant that helps you analyze and evaluate investment opportunities.  
 
-This project is an [Electron](https://www.electronjs.org/) desktop application.  You can download the latest stable version [here](https://github.com/virattt/oxygen-desktop/releases).
+This project is an [Electron](https://www.electronjs.org/) desktop application.  You can download the latest stable release version [here](https://github.com/virattt/oxygen-desktop/releases).
 
 Finally, you can find the backend server to run with this desktop app [here](https://github.com/virattt/oxygen-backend).
 
