@@ -2,7 +2,7 @@
   "homepage": ".",
   "name": "project_oxygen",
   "productName": "Project Oxygen",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Desktop app for Project Oxygen",
   "main": "build/electron.js",
   "scripts": {
@@ -81,8 +81,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "YOUR_GITHUB_USERNAME",
-      "repo": "YOUR_GITHUB_REPO",
+      "owner": "virattt",
+      "repo": "oxygen-desktop",
       "private": false,
       "releaseType": "release"
     },
