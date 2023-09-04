@@ -2,7 +2,7 @@
   "homepage": ".",
   "name": "project_oxygen",
   "productName": "Project Oxygen",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Desktop app for Project Oxygen",
   "main": "build/electron.js",
   "scripts": {
