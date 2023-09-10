@@ -1,13 +1,15 @@
+// PromptsTab.tsx
+
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Divider, Flex, HStack, Spacer, Text, useToast, VStack } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
-import { Prompt } from "../../../types";
-import { getPrompts } from "../../../redux/promptsSlice";
-import { AddPromptModal } from "../../../prompts/components/AddPromptModal";
-import api from "../../../auth/apiService";
-import { BackgroundColor, Green, White } from "../../../styles/colors";
-import { getDefaultPrompt, isDefaultPrompt, saveDefaultPrompt } from "../../../storage/LocalStorage";
+import { AppDispatch, RootState } from "../../store";
+import { Prompt } from "../../types";
+import { getPrompts } from "../../redux/promptsSlice";
+import { AddPromptModal } from "./AddPromptModal";
+import api from "../../auth/apiService";
+import { BackgroundColor, Green, White } from "../../styles/colors";
+import { getDefaultPrompt, isDefaultPrompt, saveDefaultPrompt } from "../../storage/LocalStorage";
 
 type PromptsTabProps = {};
 

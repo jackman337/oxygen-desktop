@@ -21,7 +21,7 @@ import { store } from "../../../store";
 import { logout } from "../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import FilesTab from "./FilesTab";
-import PromptsTab from "./PromptsTab";
+import PromptsTab from "../../../prompts/components/PromptsTab";
 
 type LeftSideBarProps = {};
 
