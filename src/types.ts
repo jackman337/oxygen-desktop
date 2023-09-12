@@ -38,3 +38,16 @@ export interface Prompt {
   updated_at: string;
 }
 
+
+export interface Document {
+  id: number;
+  name: string;
+  document_quarter: string | null | undefined;
+  document_url: string;
+  document_type: string; // TODO make enum
+  document_year: string;
+  token: string;
+  created_at: string;
+  updated_at: string;
+}
+
