@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/react";
 import { ChatBox } from "./ChatBox";
 import { ChatInput } from "./ChatInput";
-import ProjectOxygenHeader from "../../components/ProjectOxygenHeader";
+import ProjectOxygenHeader from "../../header/components/ProjectOxygenHeader";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { Chat, Message } from "../../types";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Divider, Heading, HStack, Spacer } from "@chakra-ui/react";
-import { Green } from "../styles/colors";
+import { Green } from "../../styles/colors";
 
 const ProjectOxygenHeader: React.FC = () => {
   const appVersion = localStorage.getItem("appVersion")
