@@ -21,7 +21,7 @@ To run Oxygen, you need to:
 3. Start the app
 
 ### 1. Clone this GitHub repo 🔍
-To clone this GitHub repo, open up your Terminal (MacOS) or Bash terminal (Windows) and navigate to wherever you want to save this repo on your local machine.  Then, run: 
+To clone this GitHub repo, open up your Terminal (MacOS) or Bash (Windows) and navigate to wherever you want to save this repo on your local machine.  Then, run: 
 
 ```
 git clone https://github.com/virattt/oxygen-desktop.git
