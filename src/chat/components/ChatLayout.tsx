@@ -127,7 +127,7 @@ const ChatLayout: React.FC<ChatLayoutProps> = ({ chat }) => {
       onmessage(event) {
         let assistantMessage = event.data;
 
-        // Copy the array to a new variable so we don't mutate the state directly
+        // Copy the array to a new variable, so we don't mutate the state directly
         let newMessages = [...messagesRef.current];
 
         // Check if there are any messages in the array
