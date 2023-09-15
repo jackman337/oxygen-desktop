@@ -1,4 +1,4 @@
-// filesSlice.ts
+// promptsSlice.ts
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Prompt } from "../types";
