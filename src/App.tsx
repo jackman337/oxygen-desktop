@@ -31,7 +31,6 @@ declare global {
       upsertFileMetadata: (fileDetails: FileDetails) => Promise<any>;
       deleteFile: (path: string) => Promise<void>;
       getAllFiles: () => Promise<FileDetails[]>;
-      getFileMetadata: (path: string) => Promise<FileDetails>;
     }
   }
 }
