@@ -114,10 +114,7 @@ const PromptsTab: React.FC<PromptsTabProps> = ({}) => {
   }
 
   return (
-    <Box
-      maxHeight="calc(100vh - 300px)"
-      overflowY="auto"
-    >
+    <Box maxHeight="calc(100vh - 300px)" overflowY="auto">
       <Spacer height="10px"/>
       <Button variant='outlinedWhite' onClick={onAddPromptClicked} width="100%">Add prompt</Button>
       <Spacer height="10px"/>
