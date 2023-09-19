@@ -1,5 +1,14 @@
 import React, { FC, useState } from 'react';
-import { Box, Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay
+} from "@chakra-ui/react";
 import { Document } from "../../types";
 
 interface AddDocumentModalProps {
@@ -16,6 +25,7 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
       <ModalOverlay/>
       <ModalContent>
         <ModalHeader>Add a document</ModalHeader>
+        <ModalCloseButton/>
         <ModalBody marginTop={4}>
           <form
             onSubmit={(event) => {
@@ -23,15 +33,13 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
               // TODO - add document to backend
             }}
           >
-            <ModalFooter>
-              <Box>
-                <Button type="submit" colorScheme="blue" ml={3} isLoading={isLoading}>
-                  Save
-                </Button>
-              </Box>
-            </ModalFooter>
           </form>
         </ModalBody>
+        <ModalFooter>
+          <Button type="submit" isLoading={isLoading}>
+            Save
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
