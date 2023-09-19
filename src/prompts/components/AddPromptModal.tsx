@@ -7,6 +7,7 @@ import {
   Input,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -79,6 +80,7 @@ export const AddPromptModal: FC<AddPromptModalProps> = ({ isOpen, onClose, onPro
       <ModalOverlay/>
       <ModalContent>
         <ModalHeader>Add a prompt</ModalHeader>
+        <ModalCloseButton/>
         <ModalBody marginTop={4}>
           <form
             onSubmit={(event) => {
@@ -130,18 +132,13 @@ export const AddPromptModal: FC<AddPromptModalProps> = ({ isOpen, onClose, onPro
               <Checkbox defaultChecked={isDefaultPrompt} onChange={handleCheckboxChange}>Set as default</Checkbox>
             </Box>
             {errorMessage && <Text color='red'>{errorMessage}</Text>}
-            <ModalFooter>
-              <Box>
-                <Button onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button type="submit" colorScheme="blue" ml={3} isLoading={isLoading}>
-                  Save
-                </Button>
-              </Box>
-            </ModalFooter>
           </form>
         </ModalBody>
+        <ModalFooter>
+          <Button type="submit" isLoading={isLoading}>
+            Save
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
