@@ -4,6 +4,7 @@ import { Message } from "../../types";
 import { getLanguageModelApiKey } from "../../storage/LocalStorage";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { BorderColor, White } from '../../styles/colors';
 
 type ChatInputProps = {
   onNewUserMessage: (message: Message, codeFileNames: string[]) => void;
@@ -178,15 +179,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onNewUserMessage }) => {
         minH="14px"
         mr={2}
         flexGrow={1}
-        borderWidth="1px"
-        borderColor="#3f3f3f"
+        borderColor={BorderColor}
         borderRadius="10px"
-        color="#ffffff"
+        color={White}
         p={2}
-        _focus={{
-          borderColor: "#1C1C1C",
-          outline: "none"
-        }}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEventHandler, FC, useState } from 'react';
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  SimpleGrid,
   Text
 } from "@chakra-ui/react";
 import { Document } from "../../types";
@@ -25,6 +26,9 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
   const [isLoading, setIsLoading] = useState(false);
   const [documentType, setDocumentType] = useState<string>("COMPANY_10K_FILING");
   const [documentUrl, setDocumentUrl] = useState<string>("");
+  const [ticker, setTicker] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [quarter, setQuarter] = useState<string>("Q1");
 
   const onSaveClicked = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -61,6 +65,24 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
               onChange={(e) => setDocumentUrl(e.target.value)}
             />
           </Box>
+          {documentType === "COMPANY_10K_FILING" && (
+            <AnnualReportRow
+              ticker={ticker}
+              year={year}
+              onTickerChange={(e) => setTicker(e.target.value)}
+              onYearChange={(e) => setYear(e.target.value)}
+            />
+          )}
+          {documentType === "COMPANY_10Q_FILING" && (
+            <QuarterlyReportRow
+              ticker={ticker}
+              year={year}
+              quarter={quarter}
+              onTickerChange={(e) => setTicker(e.target.value)}
+              onYearChange={(e) => setYear(e.target.value)}
+              onQuarterChange={(e) => setQuarter(e.target.value)}
+            />
+          )}
         </ModalBody>
         <ModalFooter>
           <Button type="submit" isLoading={isLoading} onClick={onSaveClicked}>
@@ -71,3 +93,95 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
     </Modal>
   );
 };
+
+interface AnnualReportRowProps {
+  ticker: string;
+  year: string;
+  onTickerChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+  onYearChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+}
+
+const AnnualReportRow: FC<AnnualReportRowProps> = ({ ticker, year, onTickerChange, onYearChange }) => {
+  return (
+    <SimpleGrid columns={2} spacing={4}>
+      <Box>
+        <Box marginBottom={2}>
+          <Text fontSize="14px">Ticker</Text>
+        </Box>
+        <Input
+          placeholder="AAPL"
+          value={ticker}
+          onChange={onTickerChange}
+        />
+      </Box>
+      <Box>
+        <Box marginBottom={2}>
+          <Text fontSize="14px">Year</Text>
+        </Box>
+        <Input
+          placeholder="2022"
+          value={year}
+          onChange={onYearChange}
+        />
+      </Box>
+    </SimpleGrid>
+  )
+}
+
+interface QuarterlyReportRowProps {
+  ticker: string;
+  year: string;
+  quarter: string;
+  onTickerChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+  onYearChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+  onQuarterChange?: ChangeEventHandler<HTMLSelectElement> | undefined;
+}
+
+const QuarterlyReportRow: FC<QuarterlyReportRowProps> = ({
+  ticker,
+  quarter,
+  year,
+  onTickerChange,
+  onYearChange,
+  onQuarterChange,
+}) => {
+  return (
+    <SimpleGrid columns={3} spacing={4}>
+      <Box>
+        <Box marginBottom={2}>
+          <Text fontSize="14px">Ticker</Text>
+        </Box>
+        <Input
+          placeholder="AAPL"
+          value={ticker}
+          onChange={onTickerChange}
+        />
+      </Box>
+      <Box>
+        <Box marginBottom={2}>
+          <Text fontSize="14px">Quarter</Text>
+        </Box>
+        <Select
+          value={quarter}
+          onChange={onQuarterChange}
+          iconColor="white"
+        >
+          <option value="Q1">Q1</option>
+          <option value="Q2">Q2</option>
+          <option value="Q3">Q3</option>
+          <option value="Q4">Q4</option>
+        </Select>
+      </Box>
+      <Box>
+        <Box marginBottom={2}>
+          <Text fontSize="14px">Year</Text>
+        </Box>
+        <Input
+          placeholder="2022"
+          value={year}
+          onChange={onYearChange}
+        />
+      </Box>
+    </SimpleGrid>
+  )
+}

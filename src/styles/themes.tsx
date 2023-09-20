@@ -31,15 +31,33 @@ export const chakraTheme = extendTheme({
       }
     },
     Input: {
+      defaultProps: {
+        focusBorderColor: Green,
+      },
       baseStyle: {
         field: {
           bg: 'dark',
           color: 'white',
-          fontSize: "14px"
+          fontSize: "14px",
+        }
+      }
+    },
+    Textarea: {
+      defaultProps: {
+        focusBorderColor: Green,
+      },
+      baseStyle: {
+        field: {
+          bg: 'dark',
+          color: 'white',
+          fontSize: "14px",
         }
       }
     },
     Select: {
+      defaultProps: {
+        focusBorderColor: Green,
+      },
       baseStyle: {
         field: {
           bg: 'dark',
