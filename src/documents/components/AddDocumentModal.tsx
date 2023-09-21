@@ -15,6 +15,8 @@ import {
   Text
 } from "@chakra-ui/react";
 import { Document } from "../../types";
+import api from "../../auth/apiService";
+import { Pink } from "../../styles/colors";
 
 interface AddDocumentModalProps {
   isOpen: boolean;
@@ -29,11 +31,55 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
   const [ticker, setTicker] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [quarter, setQuarter] = useState<string>("Q1");
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onSaveClicked = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setIsLoading(true);
+    createDocument()
   };
+
+  const createDocument = async () => {
+    if (!documentUrl) {
+      setErrorMessage('Please enter a URL.');
+      return;
+    }
+
+    if (!ticker) {
+      setErrorMessage("Please enter a ticker.");
+      return;
+    }
+
+    if (!year) {
+      setErrorMessage("Please enter a year.");
+      return;
+    }
+
+    if (documentType === "COMPANY_10Q_FILING" && !quarter) {
+      setErrorMessage("Please enter a quarter.");
+      return;
+    }
+
+    // Clear the error message
+    setErrorMessage('');
+
+    setIsLoading(true)
+    await api.post(`/documents/`, {
+      ticker: ticker,
+      document_url: documentUrl,
+      document_type: documentType,
+      document_year: year,
+      document_quarter: quarter,
+    }).then((response) => {
+      setIsLoading(false);
+      const document = response.data;
+      onDocumentAdded(document);
+      onClose();
+    }).catch((error) => {
+      setIsLoading(false);
+      setErrorMessage(`Error adding document: ${error}`);
+    });
+  }
+
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -82,6 +128,11 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
               onYearChange={(e) => setYear(e.target.value)}
               onQuarterChange={(e) => setQuarter(e.target.value)}
             />
+          )}
+          {errorMessage && (
+            <Box marginTop={4}>
+              <Text color={Pink}>{errorMessage}</Text>
+            </Box>
           )}
         </ModalBody>
         <ModalFooter>
