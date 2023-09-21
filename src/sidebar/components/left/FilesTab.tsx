@@ -39,7 +39,7 @@ const FilesTab: React.FC<FilesTabProps> = ({}) => {
         toast({
           title: "Success",
           description: `Removed ${file.filename}`,
-          status: "success",
+          status: "info",
           duration: 3000,
           isClosable: true,
         });

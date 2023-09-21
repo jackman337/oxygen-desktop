@@ -63,7 +63,7 @@ const PromptsTab: React.FC<PromptsTabProps> = ({}) => {
         dispatch(getPrompts());
         toast({
           title: `${prompt.name} deleted`,
-          status: "success",
+          status: "info",
           duration: 3000,
           isClosable: true,
         });
@@ -95,7 +95,7 @@ const PromptsTab: React.FC<PromptsTabProps> = ({}) => {
     dispatch(getPrompts());
     toast({
       title: `${prompt.name} created!`,
-      status: "success",
+      status: "info",
       duration: 3000,
       isClosable: true,
     });

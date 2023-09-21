@@ -31,7 +31,7 @@ export const LoginPage: React.FC = () => {
       await dispatch(loginUser({ username, password })).unwrap();
       toast({
         title: "Welcome back!",
-        status: "success",
+        status: "info",
         duration: 3000,
         isClosable: true,
       });

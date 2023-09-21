@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { Box, Button, Input, InputGroup, InputRightElement, Select, Spacer, Text, useToast } from "@chakra-ui/react";
+import { AlertStatus, Box, Button, Input, InputGroup, InputRightElement, Select, Spacer, Text, useToast } from "@chakra-ui/react";
 import {
   getLanguageModelApiKey,
   getLanguageModelName,
@@ -41,7 +41,7 @@ const ModelConfigurationTab: React.FC = () => {
     toast({
       title: "Success",
       description: "Model configurations have been saved.",
-      status: "success",
+      status: "info",
       duration: 3000,
       isClosable: true,
     });

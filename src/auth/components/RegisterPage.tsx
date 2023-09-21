@@ -30,7 +30,7 @@ export const RegisterPage: React.FC = () => {
       await dispatch(registerUser({username, password})).unwrap();
       toast({
         title: "Welcome!",
-        status: "success",
+        status: "info",
         duration: 3000,
         isClosable: true,
       });

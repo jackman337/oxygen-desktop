@@ -61,7 +61,7 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
         dispatch(getDocuments());
         toast({
           title: `${document.name} deleted`,
-          status: "success",
+          status: "info",
           duration: 3000,
           isClosable: true,
         });
@@ -80,7 +80,7 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
     dispatch(getDocuments());
     toast({
       title: `${document.name} added`,
-      status: "success",
+      status: "info",
       duration: 3000,
       isClosable: true,
     });
