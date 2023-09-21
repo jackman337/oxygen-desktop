@@ -18,6 +18,7 @@ import {
 import api from "../../auth/apiService";
 import { Prompt } from "../../types";
 import { saveDefaultPrompt } from "../../storage/LocalStorage";
+import { Pink } from '../../styles/colors';
 
 interface AddPromptModalProps {
   isOpen: boolean;
@@ -131,7 +132,7 @@ export const AddPromptModal: FC<AddPromptModalProps> = ({ isOpen, onClose, onPro
             <Box marginBottom={4}>
               <Checkbox defaultChecked={isDefaultPrompt} onChange={handleCheckboxChange}>Set as default</Checkbox>
             </Box>
-            {errorMessage && <Text color='red'>{errorMessage}</Text>}
+            {errorMessage && <Text color={Pink}>{errorMessage}</Text>}
           </form>
         </ModalBody>
         <ModalFooter>
