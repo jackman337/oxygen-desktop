@@ -28,12 +28,6 @@ export const RegisterPage: React.FC = () => {
     setIsLoading(true)
     try {
       await dispatch(registerUser({username, password})).unwrap();
-      toast({
-        title: "Welcome!",
-        status: "info",
-        duration: 3000,
-        isClosable: true,
-      });
       setIsLoading(false)
       navigate('/');
     } catch (err) {
