@@ -38,7 +38,6 @@ export interface Prompt {
   updated_at: string;
 }
 
-
 export interface Document {
   id: number;
   name: string;
@@ -47,7 +46,7 @@ export interface Document {
   document_type: string; // TODO make enum
   document_year: string;
   token: string;
+  ticker: string;
   created_at: string;
   updated_at: string;
 }
-
