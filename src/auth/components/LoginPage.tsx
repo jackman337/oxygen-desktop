@@ -29,12 +29,6 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true)
     try {
       await dispatch(loginUser({ username, password })).unwrap();
-      toast({
-        title: "Welcome back!",
-        status: "info",
-        duration: 3000,
-        isClosable: true,
-      });
       setIsLoading(false)
       navigate('/');
     } catch (err) {
