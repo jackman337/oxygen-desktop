@@ -62,6 +62,7 @@ export const chakraTheme = extendTheme({
         field: {
           bg: 'dark',
           color: 'white',
+          fontSize: "14px",
         }
       }
     },
@@ -174,6 +175,7 @@ export const chakraTheme = extendTheme({
           _selected: {
             textColor: "white",
             fontWeight: "bold",
+            fontSize: "14px",
           },
         },
       },
