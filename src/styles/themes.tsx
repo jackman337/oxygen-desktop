@@ -175,7 +175,6 @@ export const chakraTheme = extendTheme({
           _selected: {
             textColor: "white",
             fontWeight: "bold",
-            fontSize: "14px",
           },
         },
       },
