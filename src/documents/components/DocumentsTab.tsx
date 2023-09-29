@@ -12,6 +12,12 @@ import { getDocuments } from "../../redux/documentsSlice";
 
 type DocumentsTabProps = {};
 
+type DocumentRow = {
+  ticker: string;
+  num_documents: number;
+  documents: Document[];
+}
+
 const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
   const dispatch = useDispatch<AppDispatch>();
   const toast = useToast();
@@ -56,7 +62,7 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
   };
 
   const onDeleteDocumentClicked = (document: Document) => {
-    api.delete(`/documents/${document.id}/`)
+    api.delete(`/documents/${document.id}`)
       .then(() => {
         dispatch(getDocuments());
         toast({
@@ -94,16 +100,36 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
     setShowAddDocumentModal(false)
   }
 
+  const getDocumentRows = (documents: Document[]): DocumentRow[] => {
+    const documentRows: DocumentRow[] = [];
+    documents.forEach(document => {
+      const documentRow = documentRows.find(row => row.ticker === document.ticker);
+      if (documentRow) {
+        documentRow.num_documents += 1;
+        documentRow.documents.push(document);
+      } else {
+        documentRows.push({
+          ticker: document.ticker,
+          num_documents: 1,
+          documents: [document],
+        });
+      }
+    });
+    return documentRows;
+  }
+
+  const documentRows = getDocumentRows(documents);
+
   return (
     <Box maxHeight="calc(100vh - 300px)" overflowY="auto">
       <Spacer height="10px"/>
       <Button variant='outlinedWhite' onClick={onAddDocumentClicked} width="100%">Add document</Button>
       <Spacer height="10px"/>
-      {documents.map(document => {
+      {documentRows.map(documentRow => {
         return (
           <Box
-            onContextMenu={(event) => handleRightClick(event, document)}
-            key={document.id}
+            // onContextMenu={(event) => handleRightClick(event, documentData)}
+            key={documentRow.ticker}
             cursor="pointer"
             _hover={{ backgroundColor: '#3f3f3f' }}
             paddingX="12px"
@@ -113,10 +139,12 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
               <HStack spacing="auto">
                 <VStack spacing={1} align="start">
                   <Text fontSize='14px' fontWeight='bold' isTruncated>
-                    {document.name}
+                    {documentRow.ticker}
                   </Text>
-                  <Text fontSize='12px' color='#919191' isTruncated>
-                    {document.name.slice(0, 30)}{document.name.length > 30 ? '...' : ''}
+                  <Text fontSize='14px' color='#919191' isTruncated>
+                    {documentRow.num_documents > 1 ?
+                      `${documentRow.num_documents} documents` :
+                      `${documentRow.num_documents} document`}
                   </Text>
                 </VStack>
                 <Spacer/>
@@ -159,7 +187,8 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
       )}
       <Spacer height="20px"/>
       {showAddDocumentModal && (
-        <AddDocumentModal isOpen={showAddDocumentModal} onClose={onCloseAddDocumentModal} onDocumentAdded={onDocumentAdded}/>
+        <AddDocumentModal isOpen={showAddDocumentModal} onClose={onCloseAddDocumentModal}
+                          onDocumentAdded={onDocumentAdded}/>
       )}
     </Box>
   )
