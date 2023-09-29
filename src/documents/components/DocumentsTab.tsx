@@ -1,7 +1,22 @@
 // DocumentsTab.tsx
 
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Divider, Flex, HStack, Spacer, Text, useToast, VStack } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  Spacer,
+  Text,
+  useToast,
+  VStack
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { Document } from "../../types";
@@ -124,36 +139,67 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
     <Box maxHeight="calc(100vh - 300px)" overflowY="auto">
       <Spacer height="10px"/>
       <Button variant='outlinedWhite' onClick={onAddDocumentClicked} width="100%">Add document</Button>
-      <Spacer height="10px"/>
-      {documentRows.map(documentRow => {
-        return (
-          <Box
-            // onContextMenu={(event) => handleRightClick(event, documentData)}
-            key={documentRow.ticker}
-            cursor="pointer"
-            _hover={{ backgroundColor: '#3f3f3f' }}
-            paddingX="12px"
-          >
-            <Spacer height="10px"/>
-            <Flex direction="column" justify="space-between">
-              <HStack spacing="auto">
-                <VStack spacing={1} align="start">
-                  <Text fontSize='14px' fontWeight='bold' isTruncated>
-                    {documentRow.ticker}
-                  </Text>
-                  <Text fontSize='14px' color='#919191' isTruncated>
-                    {documentRow.num_documents > 1 ?
-                      `${documentRow.num_documents} documents` :
-                      `${documentRow.num_documents} document`}
-                  </Text>
-                </VStack>
-                <Spacer/>
-              </HStack>
-            </Flex>
-            <Spacer height="10px"/>
-          </Box>
-        );
-      })}
+      <Accordion defaultIndex={[0]} allowMultiple>
+        {documentRows.map(documentRow => {
+          return (
+            <AccordionItem border='none'>
+              <AccordionButton>
+                <Box
+                  flex='1'
+                  key={documentRow.ticker}
+                  cursor="pointer"
+                  _hover={{ backgroundColor: '#3f3f3f' }}
+                  padding='none'
+                >
+                  <Spacer height="10px"/>
+                  <Flex direction="column" justify="space-between">
+                    <HStack spacing="auto">
+                      <VStack spacing={1} align="start">
+                        <Text fontSize='14px' fontWeight='bold' isTruncated>
+                          {documentRow.ticker}
+                        </Text>
+                        <Text fontSize='14px' color='#919191' isTruncated>
+                          {documentRow.num_documents > 1 ? `${documentRow.num_documents} documents` : `${documentRow.num_documents} document`}
+                        </Text>
+                      </VStack>
+                      <Spacer/>
+                    </HStack>
+                  </Flex>
+                  <Spacer height="10px"/>
+                </Box>
+                <AccordionIcon color={'white'}/>
+              </AccordionButton>
+              <AccordionPanel>
+                {documentRow.documents.map(document => {
+                  return (
+                    <Box
+                      onContextMenu={(event) => handleRightClick(event, document)}
+                      key={document.name}
+                      cursor="pointer"
+                      _hover={{ backgroundColor: '#3f3f3f' }}
+                      paddingX="12px"
+                    >
+                      <Flex direction="column" justify="space-between">
+                        <HStack spacing="auto">
+                          <VStack spacing={1} align="start">
+                            <Text fontSize='14px' fontWeight='bold' isTruncated>
+                              {document.name}
+                            </Text>
+                            <Text fontSize='14px' color='#919191' isTruncated>
+                              {document.document_type}
+                            </Text>
+                          </VStack>
+                          <Spacer/>
+                        </HStack>
+                      </Flex>
+                    </Box>
+                  )
+                })}
+              </AccordionPanel>
+            </AccordionItem>
+          )
+        })}
+      </Accordion>
       {showContextMenu && (
         <Box
           ref={menuRef}
