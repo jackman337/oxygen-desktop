@@ -133,13 +133,31 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
     return documentRows;
   }
 
+  const getDocumentName = (document: Document): string => {
+    if (document.document_type === "COMPANY_10Q_FILING") {
+      return `${document.document_quarter} ${document.document_year}`;
+    } else {
+      return `FY ${document.document_year}`;
+    }
+  }
+
+  const getDocumentDescription = (document: Document): string => {
+    if (document.document_type === "COMPANY_10Q_FILING") {
+      return "Quarterly Report";
+    } else if (document.document_type === "COMPANY_10K_FILING") {
+      return "Annual Report";
+    } else {
+      return "Financial Report";
+    }
+  }
+
   const documentRows = getDocumentRows(documents);
 
   return (
     <Box maxHeight="calc(100vh - 300px)" overflowY="auto">
       <Spacer height="10px"/>
       <Button variant='outlinedWhite' onClick={onAddDocumentClicked} width="100%">Add document</Button>
-      <Accordion defaultIndex={[0]} allowMultiple>
+      <Accordion allowMultiple>
         {documentRows.map(documentRow => {
           return (
             <AccordionItem border='none' padding={0}>
@@ -185,10 +203,10 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
                         <HStack spacing="auto">
                           <VStack spacing={1} align="start">
                             <Text fontSize='14px' fontWeight='bold' isTruncated>
-                              {document.name}
+                              {getDocumentName(document)}
                             </Text>
                             <Text fontSize='14px' color='#919191' isTruncated>
-                              {document.document_type}
+                              {getDocumentDescription(document)}
                             </Text>
                           </VStack>
                           <Spacer/>
