@@ -142,34 +142,35 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
       <Accordion defaultIndex={[0]} allowMultiple>
         {documentRows.map(documentRow => {
           return (
-            <AccordionItem border='none'>
-              <AccordionButton>
-                <Box
-                  flex='1'
-                  key={documentRow.ticker}
-                  cursor="pointer"
-                  _hover={{ backgroundColor: '#3f3f3f' }}
-                  padding='none'
-                >
-                  <Spacer height="10px"/>
-                  <Flex direction="column" justify="space-between">
-                    <HStack spacing="auto">
-                      <VStack spacing={1} align="start">
-                        <Text fontSize='14px' fontWeight='bold' isTruncated>
-                          {documentRow.ticker}
-                        </Text>
-                        <Text fontSize='14px' color='#919191' isTruncated>
-                          {documentRow.num_documents > 1 ? `${documentRow.num_documents} documents` : `${documentRow.num_documents} document`}
-                        </Text>
-                      </VStack>
-                      <Spacer/>
-                    </HStack>
-                  </Flex>
-                  <Spacer height="10px"/>
-                </Box>
-                <AccordionIcon color={'white'}/>
-              </AccordionButton>
-              <AccordionPanel>
+            <AccordionItem border='none' padding={0}>
+              <Spacer height="10px"/>
+              <Box
+                key={documentRow.ticker}
+                cursor="pointer"
+                _hover={{ backgroundColor: '#3f3f3f' }}
+              >
+                <AccordionButton>
+                  <Box flex='1'>
+                    <Spacer height="10px"/>
+                    <Flex direction="column" justify="space-between">
+                      <HStack spacing="auto">
+                        <VStack spacing={1} align="start">
+                          <Text fontSize='14px' fontWeight='bold' isTruncated>
+                            {documentRow.ticker}
+                          </Text>
+                          <Text fontSize='14px' color='#919191' isTruncated>
+                            {documentRow.num_documents > 1 ? `${documentRow.num_documents} documents` : `${documentRow.num_documents} document`}
+                          </Text>
+                        </VStack>
+                        <Spacer/>
+                      </HStack>
+                    </Flex>
+                    <Spacer height="10px"/>
+                  </Box>
+                  <AccordionIcon color={'white'}/>
+                </AccordionButton>
+              </Box>
+              <AccordionPanel px={0} py={0}>
                 {documentRow.documents.map(document => {
                   return (
                     <Box
@@ -178,8 +179,9 @@ const DocumentsTab: React.FC<DocumentsTabProps> = ({}) => {
                       cursor="pointer"
                       _hover={{ backgroundColor: '#3f3f3f' }}
                       paddingX="12px"
+                      py={4}
                     >
-                      <Flex direction="column" justify="space-between">
+                      <Flex direction="column" justify="space-between" paddingX="12px">
                         <HStack spacing="auto">
                           <VStack spacing={1} align="start">
                             <Text fontSize='14px' fontWeight='bold' isTruncated>
