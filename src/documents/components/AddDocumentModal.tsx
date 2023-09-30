@@ -68,7 +68,7 @@ export const AddDocumentModal: FC<AddDocumentModalProps> = ({ isOpen, onClose, o
       document_url: documentUrl,
       document_type: documentType,
       document_year: year,
-      document_quarter: quarter,
+      document_quarter: documentType === "COMPANY_10Q_FILING" ? quarter : null,
     }).then((response) => {
       setIsLoading(false);
       const document = response.data;
